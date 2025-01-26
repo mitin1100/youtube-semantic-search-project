@@ -1,0 +1,6 @@
+streamlit:
+  page_title: "Youtube search"
+  page_icon: ":cat:"
+  layout: "wide"
+
+  

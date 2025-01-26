@@ -1,0 +1,14 @@
+# Use the official Ollama image as the base
+FROM ollama/ollama:latest
+
+# Install CA 
+RUN apt-get install -y ca-certificates
+COPY ollama.crt /usr/local/share/ca-certificates
+RUN update-ca-certificates
+
+# Copy the entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    command: python -u app.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - MONGO_URI= "FILL YOUR MONGO URI"
+      - OLLAMA_HOST=ollama:11434
+    networks:
+      - app-network
+    depends_on:
+      - ollama
+  ollama:
+    build: 
+      context: .
+      dockerfile: Dockerfile.ollama
+    ports:
+        - 11434:11434
+    volumes:
+        - ./ollama/ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+    container_name: ollama
+    
+    networks:
+      - app-network
+    
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  ollama_data:
