@@ -1,0 +1,5 @@
+/ollama
+/.env
+/.pem
+/ollama.crt
+*__pycache__
