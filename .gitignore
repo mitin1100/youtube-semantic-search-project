@@ -3,3 +3,4 @@
 /.pem
 /ollama.crt
 *__pycache__
+/data/transcripts
